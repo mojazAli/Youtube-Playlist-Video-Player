@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Simple YouTube Playlist Player</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			text-align: center;
+			/* Centers inline elements like the iframe */
+		}
+
+		#ytplayer {
+			display: block;
+			margin: 0 auto;
+			/* Ensures the iframe is centered */
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Simple YouTube Playlist Player</h1>
+	<p>
+		<span style="font-weight: bold; font-size: 18px;">
+			C language playlist link: 
+		</span>
+		https://www.youtube.com/playlist?list=PL7ersPsTyYt2Q-SqZxTA1D-melSfqBRMW
+	</p>
+	<p>
+		<span style="font-weight: bold; font-size: 18px;">
+			CPP language playlist link: 
+		</span>
+		https://www.youtube.com/watch?v=Iuo9PpGE04Y&list=PLLYz8uHU480j37APNXBdPz7YzAi4XlQUF
+	</p>
+	<input type="text" id="playlistUrl" placeholder="Paste playlist link here" size="50">
+	<button onclick="loadPlaylist()">Load Playlist</button>
+	<br><br>
+
+	<iframe id="ytplayer" width="640" height="390" frameborder="0" allow="autoplay; encrypted-media"
+		allowfullscreen></iframe>
+
+	<script>
+		function loadPlaylist() {
+			const url = document.getElementById('playlistUrl').value;
+			const playlistId = new URL(url).searchParams.get("list");
+			if (!playlistId) {
+				alert("Invalid playlist link. Must contain ?list=...");
+				return;
+			}
+			document.getElementById('ytplayer').src =
+				"https://www.youtube.com/embed/videoseries?list=" + playlistId;
+		}
+	</script>
+</body>
+
+</html>
